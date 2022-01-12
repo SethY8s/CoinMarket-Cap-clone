@@ -9,4 +9,6 @@ qString =  "?CMC_PRO_API_KEY=" + apiKey + "urls,logo,description,tags,platform,d
 fetch(url + qString)
 .then(res => {
     console.log(res)
-})
+} )
+
+
