@@ -1,14 +1,16 @@
 
 
-const apiKey = process.env.api
+// const apiKey = process.env.api
 
-let url = "https://pro-api.coinmarketcap.com"
 
-qString =  "?CMC_PRO_API_KEY=" + apiKey + "urls,logo,description,tags,platform,date_added,notice";
 
-fetch(url + qString)
-.then(res => {
-    console.log(res)
-} )
+// qString =  "?CMC_PRO_API_KEY=" + apiKey + "urls,logo,description,tags,platform,date_added,notice";
 
+const pen = fetch('http://localhost:2000/pen')
+.then( async response => response.json())
+.then( async data => { 
+    console.log(data)
+    
+    })
+    
 
