@@ -8,11 +8,13 @@ const PORT = 2000;
 app.use(express.static('public'));
 
 const url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest';
-const qString = "?CMC_PRO_API_KEY=" + process.env.apiKey + "&start=1&limit=15&convert=USD";
+
+const qString = "?CMC_PRO_API_KEY=" + process.env.apiKey + "&start=1&limit=10&convert=USD";
 
 
 app.get('/pen',  async (req, res) => {
     const fetch_res = await fetch(url + qString);
+    console.log( fetch_res)
     const json = await fetch_res.json();
     res.json(json);
   })

@@ -1,16 +1,36 @@
 
-
-// const apiKey = process.env.api
-
+const feedDisplay = document.getElementById('feed');
 
 
-// qString =  "?CMC_PRO_API_KEY=" + apiKey + "urls,logo,description,tags,platform,date_added,notice";
 
-const pen = fetch('http://localhost:2000/pen')
-.then( async response => response.json())
+ fetch('http://localhost:2000/pen')
+.then( async response => {return response.json()})
 .then( async data => { 
-    console.log(data)
     
-    })
+
+    const parsedData = data['data']
+    // console.log(data['data'][0]['name'])
+
+    await parsedData.forEach( element => {
+        // console.log(element['name'])
+        const title = `${element.name}`;
+        console.log(title)
+
+        
     
+    feedDisplay.insertAdjacentHTML('beforeend', title);
+
+
+    });
+    
+    });
+
+
+
+    
+    
+    
+    
+
+
 
