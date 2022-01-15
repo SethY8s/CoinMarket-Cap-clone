@@ -1,4 +1,9 @@
 const feedDisplay = document.getElementById('feed');
+const feedForm = document.getElementById('form')
+
+const pen = {
+
+}
 
 fetch('http://localhost:2000/data')
   .then(async (response) => {
@@ -21,7 +26,7 @@ fetch('http://localhost:2000/data')
         ].toFixed(2)}%</td>`;
       }
 
-      const title = `<tr><td>${element['cmc_rank']} ${
+      const table = `<tr><td>${element['cmc_rank']} ${
         element['name']
       } <span class='text-secondary'>(${element['symbol']})</span</td>
       <td>$${element['quote']['USD']['price'].toLocaleString('en-US')}</td>
@@ -30,6 +35,19 @@ fetch('http://localhost:2000/data')
       ].toLocaleString('en-US')}</td>
       <td>${element['circulating_supply'].toLocaleString('en-US')}</td> </tr>`;
 
-      feedDisplay.insertAdjacentHTML('beforeend', title);
+      feedDisplay.insertAdjacentHTML('beforeend', table);
+
+
+        const title = `<option>${element['name']}</option>`
+      feedForm.insertAdjacentHTML('beforeend', title);
     });
+
+    for(i = 0; i < 10; i++){
+        pen[(data['data'][i]['name'])] = (data['data'][i]['quote']['USD']['price']);
+    }
+    
+
+
   });
+
+  console.log(pen)
