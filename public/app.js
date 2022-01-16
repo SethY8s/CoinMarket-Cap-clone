@@ -1,9 +1,10 @@
-import{addingCrypto} from './function.js';
+
 const feedDisplay = document.getElementById('feed');
 const feedForm = document.getElementById('form');
-const userInput = document.querySelector('userInputContainer');
+const feedWealth = document.getElementById('wealth')
+const userInput = document.querySelector('.form-container');
 
-const pen = {};
+  const pen = {};
 
 
 
@@ -43,12 +44,22 @@ fetch('http://localhost:2000/data')
       feedForm.insertAdjacentHTML('beforeend', title);
     });
     
-    for (let i = 0; i < 10; i++) {
+     for (i = 0; i < 10; i++) {
       pen[data['data'][i]['name']] = data['data'][i]['quote']['USD']['price'];
     }
   });
+  
+  userInput.addEventListener('submit', function(e){
+    e.preventDefault();
+    const cryptoType = (document.getElementById('form')).value;
+    const amount = (document.getElementById('amount')).value;
+    const typePrice = pen[`${cryptoType}`];
+    const yourWealth = typePrice*amount;
+    feedWealth.insertAdjacentHTML('beforeend', yourWealth)
+    
+  });
+
 
   
-  
 
-console.log(pen);
+
