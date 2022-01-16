@@ -1,9 +1,11 @@
+import{addingCrypto} from './function.js';
 const feedDisplay = document.getElementById('feed');
-const feedForm = document.getElementById('form')
+const feedForm = document.getElementById('form');
+const userInput = document.querySelector('userInputContainer');
 
-const pen = {
+const pen = {};
 
-}
+
 
 fetch('http://localhost:2000/data')
   .then(async (response) => {
@@ -37,17 +39,16 @@ fetch('http://localhost:2000/data')
 
       feedDisplay.insertAdjacentHTML('beforeend', table);
 
-
-        const title = `<option>${element['name']}</option>`
+      const title = `<option>${element['name']}</option>`;
       feedForm.insertAdjacentHTML('beforeend', title);
     });
-
-    for(i = 0; i < 10; i++){
-        pen[(data['data'][i]['name'])] = (data['data'][i]['quote']['USD']['price']);
-    }
     
-
-
+    for (let i = 0; i < 10; i++) {
+      pen[data['data'][i]['name']] = data['data'][i]['quote']['USD']['price'];
+    }
   });
 
-  console.log(pen)
+  
+  
+
+console.log(pen);
