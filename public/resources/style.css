@@ -11,5 +11,9 @@
 
 .form-container{
     width: 20rem;
-    margin: auto;
+    margin: 5rem auto 5rem;
+}
+
+.money{
+    text-align: center;
 }

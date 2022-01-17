@@ -55,7 +55,7 @@ fetch('http://localhost:2000/data')
     const amount = (document.getElementById('amount')).value;
     const typePrice = pen[`${cryptoType}`];
     const yourWealth = typePrice*amount;
-    feedWealth.insertAdjacentHTML('beforeend', yourWealth)
+    feedWealth.insertAdjacentHTML('beforeend', `<div class="money"><h4>You have!</h4><h3>$${yourWealth.toFixed(2)} <br>Worth of ${cryptoType}!</h3></div>`)
     
   });
 
