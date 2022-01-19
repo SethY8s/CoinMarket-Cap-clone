@@ -17,8 +17,9 @@ fetch('http://localhost:2000/data')
     // console.log(data['data'][0]['name'])
 
     await parsedData.forEach((element) => {
+      
       let percentChange;
-
+// if statement to change color of 24hr change
       if (element['quote']['USD']['percent_change_24h'] >= 0) {
         percentChange = `<td class='text-success'>${element['quote']['USD'][
           'percent_change_24h'
@@ -28,7 +29,7 @@ fetch('http://localhost:2000/data')
           'percent_change_24h'
         ].toFixed(2)}%</td>`;
       }
-
+// making table
       const table = `<tr><td>${element['cmc_rank']} ${
         element['name']
       } <span class='text-secondary'>(${element['symbol']})</span</td>
@@ -48,7 +49,7 @@ fetch('http://localhost:2000/data')
       pen[data['data'][i]['name']] = data['data'][i]['quote']['USD']['price'];
     }
   });
-  
+  // calculator
   userInput.addEventListener('submit', function(e){
     e.preventDefault();
     const cryptoType = (document.getElementById('form')).value;
@@ -58,6 +59,7 @@ fetch('http://localhost:2000/data')
     feedWealth.insertAdjacentHTML('beforeend', `<div class="money"><h4>You have!</h4><h3>$${yourWealth.toFixed(2)} <br>Worth of ${cryptoType}!</h3></div>`)
     
   });
+  console.log(pen)
 
 
   

@@ -5,13 +5,17 @@
 }
 .table-container{
     margin: auto;
-    margin-top: 5rem;
+    margin-top: 4rem;
     width: 80%;
+    
 }
+
 
 .form-container{
     width: 20rem;
     margin: 5rem auto 5rem;
+    border: 2px solid grey;
+    padding: 2rem;
 }
 
 .money{
