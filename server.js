@@ -13,31 +13,44 @@ const url =
 const qString =
   '?CMC_PRO_API_KEY=' + process.env.apiKey + '&start=1&limit=10&convert=USD';
 
+
+let symbol = [];
+
 app.get('/data', async (req, res) => {
   const fetch_res = await fetch(url + qString);
 
-  const json = await fetch_res.json();
+  const coinData = await fetch_res.json();
   // console.log(json.data[0]['symbol']);
-  res.json(json);
 
-  let symbol = [];
+  // let symbol = []; 
+
   for (let i = 0; i < 9; i++) {
-    symbol.push(json.data[i]['symbol']);
+    symbol.push(coinData.data[i]['symbol']);
   }
-  console.log(symbol.join(','));
+  
+  res.json(coinData);
+  
 });
 
-// app.get('/logo',  async (req, res) => {
-//   const fetch_res = await fetch(url + qString);
-//   console.log( fetch_res)
-//   const json = await fetch_res.json();
-//   res.json(json);
-// })
+setTimeout(() => {
+  console.log(symbol.join(','));
+}, 8000);
 
-// fetch(url + qString).then(function(res){
-// console.log(res);
-// });
 
+
+app.get('/logo', async (req, res) => {
+  console.log(symbol);
+  const symbolUrl = symbol.join(',');
+  console.log(symbolUrl)
+  
+  const url2 = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/info';
+  const qString2 = `?CMC_PRO_API_KEY=${process.env.apiKey}&symbol=${symbolUrl}`;
+  const fetch_res2 = await fetch(url2 + qString2);
+  const coinLogo = await fetch_res2.json();
+  res.json(coinLogo);
+});
+
+// Port
 app.listen(PORT, () => {
   console.log('Server Running on 2000');
 });

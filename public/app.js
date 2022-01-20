@@ -5,10 +5,11 @@ const feedWealth = document.getElementById('wealth')
 const userInput = document.querySelector('.form-container');
 
   const pen = {};
+  
 
 
-
-fetch('http://localhost:2000/data')
+async function penis(){
+ const data = await fetch('http://localhost:2000/data')
   .then(async (response) => {
     return response.json();
   })
@@ -16,7 +17,7 @@ fetch('http://localhost:2000/data')
     const parsedData = data['data'];
     // console.log(data['data'][0]['name'])
 
-    await parsedData.forEach((element) => {
+     parsedData.forEach((element) => {
       
       let percentChange;
 // if statement to change color of 24hr change
@@ -49,6 +50,20 @@ fetch('http://localhost:2000/data')
       pen[data['data'][i]['name']] = data['data'][i]['quote']['USD']['price'];
     }
   });
+
+  // logos 
+   const logo = await fetch('http://localhost:2000/logo')
+    .then(async (response) => {
+      return response.json();
+    })
+    .then(async (logo) => {
+      console.log(logo['data'])});
+  
+}
+
+penis()
+    
+
   // calculator
   userInput.addEventListener('submit', function(e){
     e.preventDefault();
