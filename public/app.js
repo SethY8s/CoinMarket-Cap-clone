@@ -12,7 +12,6 @@ async function pageLoader() {
     })
     .then(async (data) => {
       const parsedData = data['data'];
-      // console.log(data['data'][0]['name'])
 
       parsedData.forEach((element) => {
         let percentChange;
@@ -55,21 +54,14 @@ async function pageLoader() {
       return response.json();
     })
     .then(async (data) => {
-      console.log(data['data']);
       let arr = Object.entries(data['data']);
       arr.forEach((element) => {
-        // console.log(element[1]['name']);
-        let logoContainer = document.getElementById(`${element[1]['symbol']}`)
+        let logoContainer = document.getElementById(`${element[1]['symbol']}`);
 
         const logo = `<img class="logo" src=${element[1]['logo']} alt="Coin Logo"/>`;
-        
+
         logoContainer.insertAdjacentHTML('beforeend', logo);
       });
-      // console.log(data['data'][0]['name'])
-
-      //    obj.forEach((element) => {
-
-      // })
     });
 }
 

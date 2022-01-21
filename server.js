@@ -13,36 +13,23 @@ const url =
 const qString =
   '?CMC_PRO_API_KEY=' + process.env.apiKey + '&start=1&limit=10&convert=USD';
 
-
 let symbol = [];
 
 app.get('/data', async (req, res) => {
   const fetch_res = await fetch(url + qString);
 
   const coinData = await fetch_res.json();
-  // console.log(json.data[0]['symbol']);
-
-  // let symbol = []; 
 
   for (let i = 0; i < 10; i++) {
     symbol.push(coinData.data[i]['symbol']);
   }
-  
+
   res.json(coinData);
-  
 });
 
-setTimeout(() => {
-  console.log(symbol.join(','));
-}, 8000);
-
-
-
 app.get('/logo', async (req, res) => {
-  console.log(symbol);
   const symbolUrl = symbol.join(',');
-  console.log(symbolUrl)
-  
+
   const url2 = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/info';
   const qString2 = `?CMC_PRO_API_KEY=${process.env.apiKey}&symbol=${symbolUrl}`;
   const fetch_res2 = await fetch(url2 + qString2);
