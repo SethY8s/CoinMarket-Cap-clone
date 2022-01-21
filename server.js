@@ -24,7 +24,7 @@ app.get('/data', async (req, res) => {
 
   // let symbol = []; 
 
-  for (let i = 0; i < 9; i++) {
+  for (let i = 0; i < 10; i++) {
     symbol.push(coinData.data[i]['symbol']);
   }
   
