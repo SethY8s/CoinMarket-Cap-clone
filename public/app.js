@@ -26,7 +26,7 @@ async function pageLoader() {
           ].toFixed(2)}%</td>`;
         }
         // making table
-        const table = `<tr><td>${element['cmc_rank']}<span id=${
+        const table = `<tr><td>${element['cmc_rank']}<span class="ms-4" id=${
           element['symbol']
         }></span> ${element['name']} <span class='text-secondary'>(${
           element['symbol']
