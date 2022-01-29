@@ -3,7 +3,7 @@ const feedForm = document.getElementById('form');
 const feedWealth = document.getElementById('wealth');
 const userInput = document.querySelector('.form-container');
 
-const pen = {};
+const crypto = {};
 
 async function pageLoader() {
   const data = await fetch('http://localhost:2000/data')
@@ -26,7 +26,7 @@ async function pageLoader() {
           ].toFixed(2)}%</td>`;
         }
         // making table
-        const table = `<tr><td>${element['cmc_rank']}<span class="ms-4" id=${
+        const table = `<tr><td>${element['cmc_rank']}</td><td><span id=${
           element['symbol']
         }></span> ${element['name']} <span class='text-secondary'>(${
           element['symbol']
@@ -44,7 +44,7 @@ async function pageLoader() {
       });
 
       for (i = 0; i < 10; i++) {
-        pen[data['data'][i]['name']] = data['data'][i]['quote']['USD']['price'];
+        crypto[data['data'][i]['name']] = data['data'][i]['quote']['USD']['price'];
       }
     });
 
@@ -64,6 +64,7 @@ async function pageLoader() {
       });
     });
 }
+// end of pagelaoder
 
 pageLoader();
 
@@ -72,11 +73,14 @@ userInput.addEventListener('submit', function (e) {
   e.preventDefault();
   const cryptoType = document.getElementById('form').value;
   const amount = document.getElementById('amount').value;
-  const typePrice = pen[`${cryptoType}`];
-  const yourWealth = typePrice * amount;
+  const amountEnd = document.getElementById('amountEnd').value;
+  const typePrice = crypto[`${cryptoType}`];
+  const yourWealthBefore = typePrice * amount;
+  const yourWealthAfter = typePrice * amountEnd;
+
   feedWealth.insertAdjacentHTML(
     'beforeend',
-    `<div class="money"><h4>You have!</h4><h3>$${yourWealth.toFixed(
+    `<div class="money"><h4>You have!</h4><h3>$${yourWealthBefore.toFixed(
       2
     )} <br>Worth of ${cryptoType}!</h3></div>`
   );

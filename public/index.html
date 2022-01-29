@@ -26,7 +26,7 @@
               height="24"
               class="d-inline-block align-text-top"
             />
-            <span>Crypto Calulator</span></a
+            <span>Crypto Trade Calulator</span></a
           >
           <button
             class="navbar-toggler"
@@ -58,6 +58,7 @@
         <table class="table">
           <thead>
             <tr>
+              <th>#</th>
               <th>Name</th>
               <th>Price</th>
               <th>24hr Change</th>
@@ -68,15 +69,23 @@
           <tbody id="feed"></tbody>
         </table>
       </section>
-      <h2 class="text-center pt-5">Calualte your Crypto Here!</h2>
+      <h2 class="text-center pt-5">Calualte your Trade Here!</h2>
       <section class="form-container">
-        <form>
-          <select class="form-control" id="form"></select>
+        <form class="d-flex">
+          <select class="form-group" id="form"></select>
+
           <input
             type="number"
             id="amount"
-            placeholder="Amount of Crypto"
+            placeholder="Start amount"
             required
+          />
+
+          <input
+            type="number"
+            id="amountEnd"
+            placeholder="End amount"
+            
           />
           <input type="submit" class="submit" value="Submit" />
         </form>
