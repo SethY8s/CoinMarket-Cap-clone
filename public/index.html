@@ -16,7 +16,7 @@
   <body>
     <!-- navbar -->
     <header>
-      <nav class="navbar navbar-expand-lg navbar-light p-4 mt-0">
+      <nav class="navbar navbar-expand-lg navbar-light p-4 mt-0 border-bottom">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">
             <img
@@ -71,7 +71,7 @@
       </section>
       <h2 class="text-center pt-5">Calualte your Trade Here!</h2>
       <section class="form-container">
-        <form class="d-flex">
+        <form class="d-flex justify-content-around">
           <select class="form-group" id="form"></select>
 
           <input
@@ -90,7 +90,20 @@
           <input type="submit" class="submit" value="Submit" />
         </form>
       </section>
-      <section id="wealth"></section>
+      <div class="table-container text-center">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>$Before</th>
+            <th>$After</th>
+            <th>Gain/Loss</th>
+            <th>%Change</th>
+          </tr>
+        </thead>
+        <tbody id="wealth"></tbody>
+      </table>
+    </div>
     </main>
 
     <script

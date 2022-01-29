@@ -78,11 +78,15 @@ userInput.addEventListener('submit', function (e) {
   const yourWealthBefore = typePrice * amount;
   const yourWealthAfter = typePrice * amountEnd;
 
+  const gainLoss =yourWealthAfter - yourWealthBefore;
+  const change = ((gainLoss/((yourWealthBefore + yourWealthAfter)/2))*100)
+  
+ const tradeScript = `<td>${cryptoType}</td><td>${amount}</td><td>${amountEnd}</td><td>${gainLoss}</td><td>${change}</td>`
+
+
   feedWealth.insertAdjacentHTML(
-    'beforeend',
-    `<div class="money"><h4>You have!</h4><h3>$${yourWealthBefore.toFixed(
-      2
-    )} <br>Worth of ${cryptoType}!</h3></div>`
+    'beforeend', tradeScript
+    
   );
 });
 // console.log(pen)
