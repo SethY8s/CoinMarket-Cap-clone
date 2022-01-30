@@ -72,16 +72,16 @@ pageLoader();
 userInput.addEventListener('submit', function (e) {
   e.preventDefault();
   const cryptoType = document.getElementById('form').value;
-  const amount = document.getElementById('amount').value;
-  const amountEnd = document.getElementById('amountEnd').value;
+  const amount = (document.getElementById('amount').value)*crypto[`${cryptoType}`];
+  const amountEnd = (document.getElementById('amountEnd').value)*crypto[`${cryptoType}`];;
   const typePrice = crypto[`${cryptoType}`];
   const yourWealthBefore = typePrice * amount;
   const yourWealthAfter = typePrice * amountEnd;
 
   const gainLoss =yourWealthAfter - yourWealthBefore;
-  const change = ((gainLoss/((yourWealthBefore + yourWealthAfter)/2))*100)
+  const change = (gainLoss/yourWealthBefore)*100;
   
- const tradeScript = `<td>${cryptoType}</td><td>${amount}</td><td>${amountEnd}</td><td>${gainLoss}</td><td>${change}</td>`
+ const tradeScript = `<td>${cryptoType}</td><td>$${amount.toLocaleString('en-US')}</td><td>$${amountEnd.toLocaleString('en-US')}</td><td>$${gainLoss.toLocaleString('en-US')}</td><td>${change}%</td>`
 
 
   feedWealth.insertAdjacentHTML(
