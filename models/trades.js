@@ -22,3 +22,6 @@ const tradeSchema = new mongoose.Schema({
         required: true
     }
 })
+
+const trade = mongoose.model('trade', tradeSchema);
+module.exports = trade;

@@ -3,18 +3,33 @@ const app = express();
 const fetch = require('node-fetch');
 require('dotenv').config();
 const mongoose = require('mongoose')
-
-main().catch(err => console.log(err));
-
-async function main() {
-  await mongoose.connect('mongodb://localhost:27017/cryptoCalc');
-}
+const bodyParser = require('body-parser');
+const trade = require('./models/trades')
 
 const PORT = 2000;
 
 const apiKey = process.env.apiKey 
 
 app.use(express.static('public'));
+
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({
+//   extended: true
+// }))
+
+
+
+// mongoose.connect('mongodb://localhost:27017/crypto')
+// .then(() => {
+//     console.log('mongo connection open')
+// })
+// .catch(err => {
+//     console.log('noooo')
+//     console.log(err)
+// })
+
+// const db = mongoose.connection;
+
 
 const url =
   'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest';
@@ -45,6 +60,7 @@ app.get('/logo', async (req, res) => {
   const coinLogo = await fetch_res2.json();
   res.json(coinLogo);
 });
+
 
 // Port
 app.listen(PORT, () => {

@@ -41,11 +41,11 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav ms-auto">
-              <a class="nav-link active mx-lg-4" href="#aboutME">About</a>
+              <a class="nav-link active mx-lg-4" href="#aboutME">These</a>
               <a class="nav-link active mx-lg-4" href="#carouselExampleCaptions"
-                >Calulate Trade</a
+                >Go</a
               >
-              <a class="nav-link active mx-lg-4" href="#contact">Contact</a>
+              <a class="nav-link active mx-lg-4" href="#contact">No-Where!</a>
             </div>
           </div>
         </div>
@@ -71,7 +71,9 @@
       </section>
       <h2 class="text-center pt-5">Calualte your Trade Here!</h2>
       <section class="form-container">
-        <form class="d-flex justify-content-around">
+        <!-- POST form -->
+        <form action="/sendData" method="POST" 
+        class="d-flex justify-content-around">
           <select class="form-group" id="form"></select>
 
           <input
@@ -92,6 +94,7 @@
           />
           <input type="submit" class="submit" value="Submit"  />
         </form>
+        <!-- end of POST form -->
       </section>
       <div class="table-container text-center">
       <table class="table">

@@ -88,5 +88,24 @@ userInput.addEventListener('submit', function (e) {
     'beforeend', tradeScript
     
   );
+
+  const data = {
+    coin: cryptoType,
+    before: yourWealthBefore,
+    after: yourWealthAfter,
+    gainLoss: gainLoss,
+    change: change,
+  }
+
+  const options = {
+    method: 'POST',
+    header: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  }
+  console.log(data)
+
+
 });
 // console.log(pen)
