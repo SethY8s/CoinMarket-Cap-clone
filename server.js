@@ -3,14 +3,18 @@ const app = express();
 const fetch = require('node-fetch');
 require('dotenv').config();
 const mongoose = require('mongoose')
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 const trade = require('./models/trades')
+
 
 const PORT = 2000;
 
 const apiKey = process.env.apiKey 
 
 app.use(express.static('public'));
+
+app.use(express.json({ limit: '1mb' }));
+
 
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({
@@ -59,6 +63,17 @@ app.get('/logo', async (req, res) => {
   const fetch_res2 = await fetch(url2 + qString2);
   const coinLogo = await fetch_res2.json();
   res.json(coinLogo);
+});
+
+// app post goes here
+app.post('/submitData', (req, res) => {
+  console.log(req.body)
+
+  
+  res.send('success');
+
+  console.log('all set');
+
 });
 
 

@@ -74,14 +74,14 @@ userInput.addEventListener('submit', function (e) {
   const cryptoType = document.getElementById('form').value;
   const amount = (document.getElementById('amount').value)*crypto[`${cryptoType}`];
   const amountEnd = (document.getElementById('amountEnd').value)*crypto[`${cryptoType}`];;
-  const typePrice = crypto[`${cryptoType}`];
-  const yourWealthBefore = typePrice * amount;
-  const yourWealthAfter = typePrice * amountEnd;
-
-  const gainLoss =yourWealthAfter - yourWealthBefore;
-  const change = (gainLoss/yourWealthBefore)*100;
   
- const tradeScript = `<td>${cryptoType}</td><td>$${amount.toLocaleString('en-US')}</td><td>$${amountEnd.toLocaleString('en-US')}</td><td>$${gainLoss.toLocaleString('en-US')}</td><td>${change}%</td>`
+  
+  
+
+  const difference =amountEnd - amount;
+  const changePercent = (difference/amount)*100;
+  
+ const tradeScript = `<td>${cryptoType}</td><td>$${amount.toLocaleString('en-US')}</td><td>$${amountEnd.toLocaleString('en-US')}</td><td>$${difference.toLocaleString('en-US')}</td><td>${changePercent}%</td>`
 
 
   feedWealth.insertAdjacentHTML(
@@ -89,23 +89,32 @@ userInput.addEventListener('submit', function (e) {
     
   );
 
-  const data = {
-    coin: cryptoType,
-    before: yourWealthBefore,
-    after: yourWealthAfter,
-    gainLoss: gainLoss,
-    change: change,
+  const dataToServer = {
+   coin: cryptoType,
+   before: amount,
+   after: amountEnd,
+   gainLoss: difference,
+   change: changePercent,
   }
 
-  const options = {
+console.log(dataToServer)
+
+  const option = {
     method: 'POST',
-    header: {
+    headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data),
-  }
-  console.log(data)
 
+    body: JSON.stringify(dataToServer),
+  };
+
+  fetch('/submitData', option).then(res => res.text()).then
+  (data => { if (data === 'success')
+  alert('posted blog');
+  document.getElementById('amount').value = '';
+  document.getElementById('amountEnd').value = '';
+})
+  
 
 });
 // console.log(pen)
