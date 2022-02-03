@@ -68,6 +68,12 @@ async function pageLoader() {
 
 pageLoader();
 
+async function oldTrade () {
+  let trade;
+}
+
+oldTrade()
+
 // calculator
 userInput.addEventListener('submit', function (e) {
   e.preventDefault();
