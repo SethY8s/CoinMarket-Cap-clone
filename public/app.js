@@ -68,11 +68,17 @@ async function pageLoader() {
 
 pageLoader();
 
-async function oldTrade () {
-  let trade;
-}
+// TRADELAODER
 
-oldTrade()
+// async function tradeLoader() {
+//     const data = await fetch('http://localhost:2000/loadData')
+//     console.log(data)
+// }
+
+// tradeLoader();
+
+
+
 
 // calculator
 userInput.addEventListener('submit', function (e) {

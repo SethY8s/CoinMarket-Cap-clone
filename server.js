@@ -3,7 +3,8 @@ const app = express();
 const fetch = require('node-fetch');
 require('dotenv').config();
 const mongoose = require('mongoose')
-const Trades = require('./models/trades')
+const Trades = require('./models/trades');
+const { db } = require('./models/trades');
 
 
 const PORT = 2000;
@@ -11,7 +12,7 @@ const PORT = 2000;
 const apiKey = process.env.apiKey 
 let cryptoData;
 
-mongoose.connect('mongodb://localhost:27017/crypto')
+mongoose.connect('mongodb://127.0.0.1:27017/crypto')
 .then(() => {
     console.log('mongo connection open')
 })
@@ -23,6 +24,8 @@ mongoose.connect('mongodb://localhost:27017/crypto')
 app.use(express.static('public'));
 
 app.use(express.json({ limit: '1mb' }));
+
+
 
 
 
@@ -60,14 +63,6 @@ app.get('/logo', async (req, res) => {
 app.post('/submitData', (req, res) => {
   console.log(req.body)
 
-//   mongoose.connect('mongodb://localhost:27017/crypto')
-// .then(() => {
-//     console.log('mongo connection open')
-// })
-// .catch(err => {
-//     console.log('noooo')
-//     console.log(err)
-// })
 
 const p = new tradeSchema ({
     coin: req.body.coin,
@@ -92,20 +87,13 @@ p.save().then(p => {
 });
 
 app.get('/loadData', async (req, res) => {
+  let resultArr =[];
   const penn = await Trades.find({})
-
-  console.log(penn)
+  const pens = JSON.stringify(penn);
   
-    // const cryptoData = mongoose.connect('mongodb://localhost:27017/crypto')
-    //   trades.find({}, (err, cryptoData) => {
-    //   if(err){
-    //     res.send('something went wrong');
-    //     next();
-    //   }
-    //   res.json(cryptoData)
-    //   console.log(cryptoData)
-    // });
-    // console.log(cryptoData)
+  console.log(pens)
+  res.send(pens);
+  // res.snd only takes string
 })
 
 
