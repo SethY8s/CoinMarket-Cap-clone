@@ -70,12 +70,12 @@ pageLoader();
 
 // TRADELAODER
 
-// async function tradeLoader() {
-//     const data = await fetch('http://localhost:2000/loadData')
-//     console.log(data)
-// }
-
-// tradeLoader();
+async function tradeLoader() {
+    const data = await fetch('http://localhost:2000/loadData')
+    const pens = await data.json()
+    console.log(pens)
+}
+tradeLoader();
 
 
 
