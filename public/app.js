@@ -72,8 +72,20 @@ pageLoader();
 
 async function tradeLoader() {
     const data = await fetch('http://localhost:2000/loadData')
-    const pens = await data.json()
-    console.log(pens)
+    const tradeData = await data.json()
+    console.log(tradeData)
+    tradeData.forEach(element => {
+      console.log(element.coin)
+      const tradeLoader = `<td>${element.coin}</td>
+      <td>$${element.before.toLocaleString('en-US')}</td>
+      <td>$${element.after.toLocaleString('en-US')}</td>
+      <td>$${element.gainLoss.toLocaleString('en-US')}</td>
+      <td>${element.change}%</td>`;
+
+      feedWealth.insertAdjacentHTML(
+        'beforeend', tradeLoader)
+      
+    })
 }
 tradeLoader();
 
@@ -90,14 +102,14 @@ userInput.addEventListener('submit', function (e) {
   
   
 
-  const difference =amountEnd - amount;
+  const difference = amountEnd - amount;
   const changePercent = (difference/amount)*100;
   
  const tradeScript = `<td>${cryptoType}</td><td>$${amount.toLocaleString('en-US')}</td><td>$${amountEnd.toLocaleString('en-US')}</td><td>$${difference.toLocaleString('en-US')}</td><td>${changePercent}%</td>`
 
 
   feedWealth.insertAdjacentHTML(
-    'beforeend', tradeScript
+    'afterbegin', tradeScript
     
   );
 
