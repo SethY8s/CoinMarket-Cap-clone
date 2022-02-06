@@ -72,15 +72,15 @@ pageLoader();
 
 async function tradeLoader() {
     const data = await fetch('http://localhost:2000/loadData')
-    const tradeData = await data.json()
-    console.log(tradeData)
-    tradeData.forEach(element => {
-      console.log(element.coin)
-      const tradeLoader = `<td>${element.coin}</td>
-      <td>$${element.before.toLocaleString('en-US')}</td>
-      <td>$${element.after.toLocaleString('en-US')}</td>
-      <td>$${element.gainLoss.toLocaleString('en-US')}</td>
-      <td>${element.change}%</td>`;
+    const pen = await data.json()
+    
+    pen.forEach(el => {
+      console.log(el .coin)
+      const tradeLoader = `<td>${el.coin}</td>
+      <td>$${el.before.toLocaleString('en-US')}</td>
+      <td>$${el.after.toLocaleString('en-US')}</td>
+      <td>$${el.gainLoss.toLocaleString('en-US')}</td>
+      <td>${el.change}%</td>`;
 
       feedWealth.insertAdjacentHTML(
         'beforeend', tradeLoader)

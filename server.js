@@ -64,7 +64,7 @@ app.post('/submitData', (req, res) => {
   console.log(req.body)
 
 
-const p = new tradeSchema ({
+const p = new Trades ({
     coin: req.body.coin,
     before: req.body.before,
     after: req.body.after,
