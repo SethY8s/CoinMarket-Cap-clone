@@ -44,7 +44,8 @@ async function pageLoader() {
       });
 
       for (i = 0; i < 10; i++) {
-        crypto[data['data'][i]['name']] = data['data'][i]['quote']['USD']['price'];
+        crypto[data['data'][i]['name']] =
+          data['data'][i]['quote']['USD']['price'];
       }
     });
 
@@ -71,57 +72,53 @@ pageLoader();
 // TRADELAODER
 
 async function tradeLoader() {
-    const data = await fetch('http://localhost:2000/loadData')
-    const pen = await data.json()
-    
-    pen.forEach(el => {
-      console.log(el .coin)
-      const tradeLoader = `<td>${el.coin}</td>
+  const data = await fetch('http://localhost:2000/loadData');
+  const pen = await data.json();
+
+  pen.forEach((el) => {
+    console.log(el.coin);
+    const tradeLoader = `<td>${el.coin}</td>
       <td>$${el.before.toLocaleString('en-US')}</td>
       <td>$${el.after.toLocaleString('en-US')}</td>
       <td>$${el.gainLoss.toLocaleString('en-US')}</td>
       <td>${el.change}%</td>`;
 
-      feedWealth.insertAdjacentHTML(
-        'afterbegin', tradeLoader)
-      
-    })
+    feedWealth.insertAdjacentHTML('afterbegin', tradeLoader);
+  });
 }
 tradeLoader();
-
-
-
 
 // calculator
 userInput.addEventListener('submit', function (e) {
   e.preventDefault();
   const cryptoType = document.getElementById('form').value;
-  const amount = (document.getElementById('amount').value)*crypto[`${cryptoType}`];
-  const amountEnd = (document.getElementById('amountEnd').value)*crypto[`${cryptoType}`];;
-  
-  
-  
+  const amount =
+    document.getElementById('amount').value * crypto[`${cryptoType}`];
+  const amountEnd =
+    document.getElementById('amountEnd').value * crypto[`${cryptoType}`];
 
   const difference = amountEnd - amount;
-  const changePercent = (difference/amount)*100;
-  
- const tradeScript = `<td>${cryptoType}</td><td>$${amount.toLocaleString('en-US')}</td><td>$${amountEnd.toLocaleString('en-US')}</td><td>$${difference.toLocaleString('en-US')}</td><td>${changePercent}%</td>`
+  const changePercent = (difference / amount) * 100;
 
+  const tradeScript = `<td>${cryptoType}</td><td>$${amount.toLocaleString(
+    'en-US'
+  )}</td><td>$${amountEnd.toLocaleString(
+    'en-US'
+  )}</td><td>$${difference.toLocaleString(
+    'en-US'
+  )}</td><td>${changePercent}%</td>`;
 
-  feedWealth.insertAdjacentHTML(
-    'afterbegin', tradeScript
-    
-  );
+  feedWealth.insertAdjacentHTML('afterbegin', tradeScript);
 
   const dataToServer = {
-   coin: cryptoType,
-   before: amount,
-   after: amountEnd,
-   gainLoss: difference,
-   change: changePercent,
-  }
+    coin: cryptoType,
+    before: amount,
+    after: amountEnd,
+    gainLoss: difference,
+    change: changePercent,
+  };
 
-console.log(dataToServer)
+  console.log(dataToServer);
 
   const option = {
     method: 'POST',
@@ -132,13 +129,12 @@ console.log(dataToServer)
     body: JSON.stringify(dataToServer),
   };
 
-  fetch('/submitData', option).then(res => res.text()).then
-  (data => { if (data === 'success')
-  alert('posted blog');
-  document.getElementById('amount').value = '';
-  document.getElementById('amountEnd').value = '';
-})
-  
-
+  fetch('/submitData', option)
+    .then((res) => res.text())
+    .then((data) => {
+      if (data === 'success') alert('posted blog');
+      document.getElementById('amount').value = '';
+      document.getElementById('amountEnd').value = '';
+    });
 });
 // console.log(pen)

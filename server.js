@@ -2,38 +2,33 @@ const express = require('express');
 const app = express();
 const fetch = require('node-fetch');
 require('dotenv').config();
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 const Trades = require('./models/trades');
 const { db } = require('./models/trades');
 
-
 const PORT = 2000;
 
-const apiKey = process.env.apiKey 
+const apiKey = process.env.apiKey;
 let cryptoData;
 
-mongoose.connect('mongodb://127.0.0.1:27017/crypto')
-.then(() => {
-    console.log('mongo connection open')
-})
-.catch(err => {
-    console.log('noooo')
-    console.log(err)
-})
+mongoose
+  .connect('mongodb://127.0.0.1:27017/crypto')
+  .then(() => {
+    console.log('mongo connection open');
+  })
+  .catch((err) => {
+    console.log('noooo');
+    console.log(err);
+  });
 
 app.use(express.static('public'));
 
 app.use(express.json({ limit: '1mb' }));
 
-
-
-
-
 const url =
   'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest';
 
-const qString =
-  '?CMC_PRO_API_KEY=' + apiKey + '&start=1&limit=10&convert=USD';
+const qString = '?CMC_PRO_API_KEY=' + apiKey + '&start=1&limit=10&convert=USD';
 
 let symbol = [];
 
@@ -61,41 +56,38 @@ app.get('/logo', async (req, res) => {
 
 // app post goes here
 app.post('/submitData', (req, res) => {
-  console.log(req.body)
+  console.log(req.body);
 
-
-const p = new Trades ({
+  const p = new Trades({
     coin: req.body.coin,
     before: req.body.before,
     after: req.body.after,
     gainLoss: req.body.gainLoss,
-    change: req.body.change
-})
+    change: req.body.change,
+  });
 
-p.save().then(p => {
-    // console.log(p)
-})
-.catch(e => {
-    console.log(e)
-})
+  p.save()
+    .then((p) => {
+      // console.log(p)
+    })
+    .catch((e) => {
+      console.log(e);
+    });
 
-  
   res.send('success');
 
   console.log('all set');
-
 });
 
 app.get('/loadData', async (req, res) => {
-  let resultArr =[];
-  const penn = await Trades.find({})
+  let resultArr = [];
+  const penn = await Trades.find({});
   const pens = JSON.stringify(penn);
-  
-  console.log(pens)
+
+  console.log(pens);
   res.send(pens);
   // res.snd only takes string
-})
-
+});
 
 // Port
 app.listen(PORT, () => {

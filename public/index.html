@@ -70,10 +70,9 @@
         </table>
       </section>
       <h2 class="text-center pt-5">Calualte your Trade Here!</h2>
-      <section class="form-container">
+      <section class="form-container d-flex justify-content-around">
         <!-- POST form -->
-        <form  
-        class="d-flex justify-content-around">
+        <form>
           <select class="form-group" id="form"></select>
 
           <input
@@ -90,26 +89,25 @@
             placeholder="End amount"
             step="any"
             required
-            
           />
-          <input type="submit" class="submit" value="Submit"  />
+          <input type="submit" class="submit" value="Submit" />
         </form>
-        <!-- end of POST form -->
       </section>
+      <!-- end of POST form -->
       <div class="table-container text-center">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Type</th>
-            <th>$Before</th>
-            <th>$After</th>
-            <th>Gain/Loss</th>
-            <th>%Change</th>
-          </tr>
-        </thead>
-        <tbody id="wealth"></tbody>
-      </table>
-    </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>$Before</th>
+              <th>$After</th>
+              <th>Gain/Loss</th>
+              <th>%Change</th>
+            </tr>
+          </thead>
+          <tbody id="wealth"></tbody>
+        </table>
+      </div>
     </main>
 
     <script
