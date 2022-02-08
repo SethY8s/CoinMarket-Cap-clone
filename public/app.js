@@ -83,7 +83,7 @@ async function tradeLoader() {
       <td>${el.change}%</td>`;
 
       feedWealth.insertAdjacentHTML(
-        'beforeend', tradeLoader)
+        'afterbegin', tradeLoader)
       
     })
 }
