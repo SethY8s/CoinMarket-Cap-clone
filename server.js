@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const Trades = require('./models/trades');
 const { db } = require('./models/trades');
 
-const PORT = 2000;
+const PORT = process.env.PORT || 2000;
 
 const apiKey = process.env.apiKey;
 let cryptoData;
@@ -91,5 +91,5 @@ app.get('/loadData', async (req, res) => {
 
 // Port
 app.listen(PORT, () => {
-  console.log('Server Running on 2000');
+  console.log(`App running ${PORT}`);
 });
