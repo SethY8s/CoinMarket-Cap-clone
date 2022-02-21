@@ -6,7 +6,7 @@ const userInput = document.querySelector('.form-container');
 const crypto = {};
 
 async function pageLoader() {
-  const data = await fetch('http://localhost:2000/data')
+  const data = await fetch('/data')
     .then(async (response) => {
       return response.json();
     })
