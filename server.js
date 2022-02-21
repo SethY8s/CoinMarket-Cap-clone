@@ -17,7 +17,7 @@ mongoose
     console.log('mongo connection open');
   })
   .catch((err) => {
-    console.log('noooo');
+    console.log('not conneccted to mongo');
     console.log(err);
   });
 
