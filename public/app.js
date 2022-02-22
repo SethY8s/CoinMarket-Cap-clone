@@ -50,7 +50,7 @@ async function pageLoader() {
     });
 
   // logos
-  const logo = await fetch('http://localhost:2000/logo')
+  const logo = await fetch('/logo')
     .then(async (response) => {
       return response.json();
     })
@@ -72,7 +72,7 @@ pageLoader();
 // TRADELAODER
 
 async function tradeLoader() {
-  const data = await fetch('http://localhost:2000/loadData');
+  const data = await fetch('/loadData');
   const pen = await data.json();
 
   pen.forEach((el) => {
