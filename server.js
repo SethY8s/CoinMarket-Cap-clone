@@ -9,7 +9,7 @@ const { db } = require('./models/trades');
 const PORT = process.env.PORT || 2000;
 
 const apiKey = process.env.apiKey;
-let cryptoData;
+
 
 mongoose
   .connect('mongodb://127.0.0.1:27017/crypto')
@@ -80,12 +80,11 @@ app.post('/submitData', (req, res) => {
 });
 
 app.get('/loadData', async (req, res) => {
-  let resultArr = [];
-  const penn = await Trades.find({});
-  const pens = JSON.stringify(penn);
+  
+  const tradeData = await Trades.find({});
+  const tradesData = JSON.stringify(tradeData);
 
-  console.log(pens);
-  res.send(pens);
+  res.send(tradesData);
   // res.snd only takes string
 });
 
