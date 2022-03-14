@@ -5,10 +5,17 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const Trades = require('./models/trades');
 const { db } = require('./models/trades');
+const { auth } = require('express-openid-connect');
+const { config } = require('./public/auth0Config')
+
+
 
 const PORT = process.env.PORT || 2000;
 
 const apiKey = process.env.apiKey;
+
+app.use(auth(config));
+
 
 
 mongoose
