@@ -2,6 +2,7 @@ const feedDisplay = document.getElementById('feed');
 const feedForm = document.getElementById('form');
 const feedWealth = document.getElementById('wealth');
 const userInput = document.querySelector('.form-container');
+const profileData = document.getElementById('userData')
 
 const crypto = {};
 
@@ -75,14 +76,7 @@ async function userLoader(){
   const pen = await data.text();
   console.log(pen)
   
-
-  // fetch('/submitData', option)
-  // .then((res) => res.text())
-  // .then((data) => {
-  //   if (data === 'success') alert('posted blog');
-  //   document.getElementById('amount').value = '';
-  //   document.getElementById('amountEnd').value = '';
-  // });
+  profileData.insertAdjacentHTML('beforeend', pen);
 
 }
 userLoader()

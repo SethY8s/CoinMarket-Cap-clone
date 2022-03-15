@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const Trades = require('./models/trades');
 const { db } = require('./models/trades');
 const { auth, requiresAuth } = require('express-openid-connect');
-const { config } = require('./public/auth0Config')
+const { config } = require('./ServerModules/auth0Config')
 
 
 
@@ -23,7 +23,13 @@ app.use(express.json({ limit: '1mb' }));
 app.use(auth(config));
 
 app.get('/userLoader', (req, res) => {
-  res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out')
+  res.send(req.oidc.isAuthenticated() ? `<a class="nav-link active mx-lg-4" href="#yourTrades">Your Trades</a>
+  <a class="nav-link active mx-lg-4" href="http://localhost:2000/logout"
+    >logOut</a
+  >` : `<a class="nav-link active mx-lg-4" href="#yourTrades">Your Trades</a>
+  <a class="nav-link active mx-lg-4" href="http://localhost:2000/login"
+    >login</a
+  >`)
 });
 
 // end of login part
