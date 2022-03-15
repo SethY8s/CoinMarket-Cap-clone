@@ -5,7 +5,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const Trades = require('./models/trades');
 const { db } = require('./models/trades');
-const { auth } = require('express-openid-connect');
+const { auth, requiresAuth } = require('express-openid-connect');
 const { config } = require('./public/auth0Config')
 
 
@@ -62,10 +62,10 @@ app.get('/logo', async (req, res) => {
 });
 
 // app post goes here
-app.post('/submitData', (req, res) => {
+app.post('/submitData',requiresAuth(), (req, res) => {
   console.log(req.body);
 
-  const p = new Trades({
+  const sendToMongo = new Trades({
     coin: req.body.coin,
     before: req.body.before,
     after: req.body.after,
@@ -73,9 +73,9 @@ app.post('/submitData', (req, res) => {
     change: req.body.change,
   });
 
-  p.save()
-    .then((p) => {
-      // console.log(p)
+  sendToMongo.save()
+    .then((sendToMongo) => {
+      // console.log(sendToMongo)
     })
     .catch((e) => {
       console.log(e);
