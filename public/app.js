@@ -6,7 +6,7 @@ const userInput = document.querySelector('.form-container');
 const crypto = {};
 
 async function pageLoader() {
-  const data = await fetch('/data')
+  await fetch('/data')
     .then(async (response) => {
       return response.json();
     })
@@ -42,7 +42,7 @@ async function pageLoader() {
         const title = `<option>${element['name']}</option>`;
         feedForm.insertAdjacentHTML('beforeend', title);
       });
-
+// for loop is to give data to form when it is submitted
       for (i = 0; i < 10; i++) {
         crypto[data['data'][i]['name']] =
           data['data'][i]['quote']['USD']['price'];
@@ -50,7 +50,7 @@ async function pageLoader() {
     });
 
   // logos
-  const logo = await fetch('/logo')
+  await fetch('/logo')
     .then(async (response) => {
       return response.json();
     })
@@ -69,7 +69,26 @@ async function pageLoader() {
 
 pageLoader();
 
+// userLoader function
+async function userLoader(){
+  const data = await fetch('/userLoader');
+  const pen = await data.text();
+  console.log(pen)
+  
+
+  // fetch('/submitData', option)
+  // .then((res) => res.text())
+  // .then((data) => {
+  //   if (data === 'success') alert('posted blog');
+  //   document.getElementById('amount').value = '';
+  //   document.getElementById('amountEnd').value = '';
+  // });
+
+}
+userLoader()
+
 // TRADELAODER
+
 
 async function tradeLoader() {
   const data = await fetch('/loadData');

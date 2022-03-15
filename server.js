@@ -14,7 +14,19 @@ const PORT = process.env.PORT || 2000;
 
 const apiKey = process.env.apiKey;
 
+app.use(express.static('public'));
+
+app.use(express.json({ limit: '1mb' }));
+
+// login part
+
 app.use(auth(config));
+
+app.get('/userLoader', (req, res) => {
+  res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out')
+});
+
+// end of login part
 
 
 
@@ -28,9 +40,9 @@ mongoose
     console.log(err);
   });
 
-app.use(express.static('public'));
+// app.use(express.static('public'));
 
-app.use(express.json({ limit: '1mb' }));
+// app.use(express.json({ limit: '1mb' }));
 
 const url =
   'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest';
