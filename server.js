@@ -6,9 +6,7 @@ const mongoose = require('mongoose');
 const Trades = require('./models/trades');
 const { db } = require('./models/trades');
 const { auth, requiresAuth } = require('express-openid-connect');
-const { config } = require('./ServerModules/auth0Config')
-
-
+const { config } = require('./ServerModules/auth0Config');
 
 const PORT = process.env.PORT || 2000;
 
@@ -23,18 +21,14 @@ app.use(express.json({ limit: '1mb' }));
 app.use(auth(config));
 
 app.get('/userLoader', (req, res) => {
-  res.send(req.oidc.isAuthenticated() ? `<a class="nav-link active mx-lg-4" href="#yourTrades">Your Trades</a>
-  <a class="nav-link active mx-lg-4" href="http://localhost:2000/logout"
-    >logOut</a
-  >` : `<a class="nav-link active mx-lg-4" href="#yourTrades">Your Trades</a>
-  <a class="nav-link active mx-lg-4" href="http://localhost:2000/login"
-    >login</a
-  >`)
+  res.send(
+    req.oidc.isAuthenticated()
+      ? `<a class="nav-link active mx-lg-4" href="http://localhost:2000/logout" ><button class="btn btn-secondary btn-sm">logout</button></a>`
+      : `<a class="nav-link active mx-lg-4" href="http://localhost:2000/login" ><button class="btn btn-secondary btn-sm">login</button></a>`
+  );
 });
 
 // end of login part
-
-
 
 mongoose
   .connect('mongodb://127.0.0.1:27017/crypto')
@@ -80,7 +74,7 @@ app.get('/logo', async (req, res) => {
 });
 
 // app post goes here
-app.post('/submitData',requiresAuth(), (req, res) => {
+app.post('/submitData', requiresAuth(), (req, res) => {
   console.log(req.body);
 
   const sendToMongo = new Trades({
@@ -91,7 +85,8 @@ app.post('/submitData',requiresAuth(), (req, res) => {
     change: req.body.change,
   });
 
-  sendToMongo.save()
+  sendToMongo
+    .save()
     .then((sendToMongo) => {
       // console.log(sendToMongo)
     })
@@ -105,7 +100,6 @@ app.post('/submitData',requiresAuth(), (req, res) => {
 });
 
 app.get('/loadData', async (req, res) => {
-  
   const tradeData = await Trades.find({});
   const tradesData = JSON.stringify(tradeData);
 
