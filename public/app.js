@@ -118,9 +118,9 @@ async function tradeLoader() {
       fetch('/deleteData', option)
         .then((res) => res.text())
         .then((data) => {
-          if (data === 'successful') alert('delted blog');
-          document.getElementById('amount').value = '';
-          document.getElementById('amountEnd').value = '';
+          if (data === 'successful') if(confirm('Your Trade has been deleted! Click OK to refresh the page and see most up to date trades.')){
+            window.location.reload();  
+        }
         });
 
    })
