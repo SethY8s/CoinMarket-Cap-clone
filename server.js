@@ -27,7 +27,7 @@ app.get('/userLoader', (req, res) => {
       ? `<a class="nav-link active mx-lg-4" href="http://localhost:2000/logout" ><button class="btn btn-secondary btn-sm">logout</button></a> <p class="userName">Welcome: ${JSON.stringify(
           req.oidc.user.nickname
         )}</p>`
-      : `<a class="nav-link active mx-lg-4" href="http://localhost:2000/login" ><button class="btn btn-secondary btn-sm">login</button></a>`
+      : `<a class="nav-link active mx-lg-4" href="https://coin-marketcap-clone.herokuapp.com/callback" ><button class="btn btn-secondary btn-sm">login</button></a>`
   );
 });
 
