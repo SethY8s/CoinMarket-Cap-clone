@@ -23,7 +23,9 @@ app.use(auth(config));
 app.get('/userLoader', (req, res) => {
   res.send(
     req.oidc.isAuthenticated()
-      ? `<a class="nav-link active mx-lg-4" href="http://localhost:2000/logout" ><button class="btn btn-secondary btn-sm">logout</button></a> <p class="userName">Welcome: ${JSON.stringify(req.oidc.user.nickname)}</p>`
+      ? `<a class="nav-link active mx-lg-4" href="http://localhost:2000/logout" ><button class="btn btn-secondary btn-sm">logout</button></a> <p class="userName">Welcome: ${JSON.stringify(
+          req.oidc.user.nickname
+        )}</p>`
       : `<a class="nav-link active mx-lg-4" href="http://localhost:2000/login" ><button class="btn btn-secondary btn-sm">login</button></a>`
   );
 });
@@ -39,7 +41,6 @@ mongoose
     console.log('not conneccted to mongo');
     console.log(err);
   });
-
 
 const url =
   'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest';
@@ -98,33 +99,28 @@ app.post('/submitData', requiresAuth(), (req, res) => {
 });
 
 app.get('/loadTradeData', async (req, res) => {
-  const tradeData = req.oidc.isAuthenticated() ? await Trades.find({userName: JSON.stringify(req.oidc.user.nickname)}) : null
+  const tradeData = req.oidc.isAuthenticated()
+    ? await Trades.find({ userName: JSON.stringify(req.oidc.user.nickname) })
+    : null;
   const tradesData = JSON.stringify(tradeData);
 
-  console.log(tradeData)
+  console.log(tradeData);
 
   res.send(tradesData);
   // res.snd only takes string
 });
 
 app.post('/deleteData', requiresAuth(), (req, res) => {
-  console.log(JSON.stringify(req.body.id))
-  // console.log(req.body.id);
-  // const deleteData = JSON.stringify(req.body.id)
+  console.log(JSON.stringify(req.body.id));
+
   async function run() {
-    await Trades.deleteOne({_id: req.body.id})
+    await Trades.deleteOne({ _id: req.body.id });
   }
 
-  run()
+  run();
 
-  // await Trades.deleteMany({_id: JSON.stringify(req.body.id)})
-
-
-  res.send('successful')
-
-})
-
-
+  res.send('successful');
+});
 
 // Port
 app.listen(PORT, () => {

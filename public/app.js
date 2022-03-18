@@ -5,6 +5,7 @@ const userInput = document.querySelector('.form-container');
 const profileData = document.getElementById('userData');
 
 
+
 const crypto = {};
 
 async function pageLoader() {
@@ -118,22 +119,22 @@ async function tradeLoader() {
       fetch('/deleteData', option)
         .then((res) => res.text())
         .then((data) => {
-          if (data === 'successful') if(confirm('Your Trade has been deleted! Click OK to refresh the page and see most up to date trades.')){
-            window.location.reload();  
-        }
+          if (data === 'successful') alert('delted blog');
+          document.getElementById('amount').value = '';
+          document.getElementById('amountEnd').value = '';
         });
 
    })
   });
   
 }
-await tradeLoader();
-
-
+// await is what is messing with it
+tradeLoader();
 
 
 // calculator
-userInput.addEventListener('submit', function (e) {
+userInput.addEventListener('submit', function (e){
+
   e.preventDefault();
   const cryptoType = document.getElementById('form').value;
   const amount =
@@ -164,7 +165,7 @@ userInput.addEventListener('submit', function (e) {
 
   console.log(dataToServer);
 
-  const option = {
+  const options = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -173,7 +174,7 @@ userInput.addEventListener('submit', function (e) {
     body: JSON.stringify(dataToServer),
   };
 
-  fetch('/submitData', option)
+  fetch('/submitData', options)
     .then((res) => res.text())
     .then((data) => {
       if (data === 'success') alert('posted blog');
