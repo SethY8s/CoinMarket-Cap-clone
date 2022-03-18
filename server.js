@@ -40,9 +40,6 @@ mongoose
     console.log(err);
   });
 
-// app.use(express.static('public'));
-
-// app.use(express.json({ limit: '1mb' }));
 
 const url =
   'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest';
@@ -51,7 +48,7 @@ const qString = '?CMC_PRO_API_KEY=' + apiKey + '&start=1&limit=10&convert=USD';
 
 let symbol = [];
 
-app.get('/data', async (req, res) => {
+app.get('/coinData', async (req, res) => {
   const fetch_res = await fetch(url + qString);
 
   const coinData = await fetch_res.json();
@@ -78,6 +75,7 @@ app.post('/submitData', requiresAuth(), (req, res) => {
   console.log(req.body);
 
   const sendToMongo = new Trades({
+    userName: JSON.stringify(req.oidc.user.nickname),
     coin: req.body.coin,
     before: req.body.before,
     after: req.body.after,
@@ -99,9 +97,11 @@ app.post('/submitData', requiresAuth(), (req, res) => {
   console.log('all set');
 });
 
-app.get('/loadData', async (req, res) => {
-  const tradeData = await Trades.find({});
+app.get('/loadTradeData', async (req, res) => {
+  const tradeData = req.oidc.isAuthenticated() ? await Trades.find({userName: JSON.stringify(req.oidc.user.nickname)}) : null
   const tradesData = JSON.stringify(tradeData);
+
+  console.log(tradeData)
 
   res.send(tradesData);
   // res.snd only takes string

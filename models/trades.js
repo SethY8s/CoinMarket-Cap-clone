@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const tradeSchema = new mongoose.Schema({
+  userName: {
+    type: String,
+    required: true,
+  },
   coin: {
     type: String,
     required: true,

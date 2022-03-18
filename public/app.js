@@ -7,7 +7,7 @@ const profileData = document.getElementById('userData')
 const crypto = {};
 
 async function pageLoader() {
-  await fetch('/data')
+  await fetch('/coinData')
     .then(async (response) => {
       return response.json();
     })
@@ -85,7 +85,7 @@ userLoader()
 
 
 async function tradeLoader() {
-  const data = await fetch('/loadData');
+  const data = await fetch('/loadTradeData');
   const pen = await data.json();
 
   pen.forEach((el) => {
