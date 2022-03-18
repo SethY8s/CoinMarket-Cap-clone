@@ -2,7 +2,8 @@ const feedDisplay = document.getElementById('feed');
 const feedForm = document.getElementById('form');
 const feedWealth = document.getElementById('wealth');
 const userInput = document.querySelector('.form-container');
-const profileData = document.getElementById('userData')
+const profileData = document.getElementById('userData');
+
 
 const crypto = {};
 
@@ -44,7 +45,7 @@ async function pageLoader() {
         feedForm.insertAdjacentHTML('beforeend', title);
       });
 // for loop is to give data to form when it is submitted
-      for (i = 0; i < 10; i++) {
+      for (let i = 0; i < 10; i++) {
         crypto[data['data'][i]['name']] =
           data['data'][i]['quote']['USD']['price'];
       }
@@ -83,23 +84,33 @@ userLoader()
 
 // TRADELAODER
 
-
 async function tradeLoader() {
-  const data = await fetch('/loadTradeData');
-  const pen = await data.json();
+  const dataFromDB = await fetch('/loadTradeData');
+  const sortedDataFromDb =  await dataFromDB.json();
 
-  pen.forEach((el) => {
+   sortedDataFromDb.forEach((el) => {
     console.log(el.coin);
     const tradeLoader = `<td>${el.coin}</td>
       <td>$${el.before.toLocaleString('en-US')}</td>
       <td>$${el.after.toLocaleString('en-US')}</td>
       <td>$${el.gainLoss.toLocaleString('en-US')}</td>
-      <td>${el.change}%</td>`;
+      <td>${el.change}%</td>
+      <td><button id="deleteButton" class="btn btn-secondary">delete trade</button></td>`;
 
-    feedWealth.insertAdjacentHTML('afterbegin', tradeLoader);
+     feedWealth.insertAdjacentHTML('afterbegin', tradeLoader);
   });
 }
-tradeLoader();
+await tradeLoader();
+
+
+// delete trade
+
+document.getElementById("deleteButton").addEventListener('click', function(){
+   console.log('penenns')
+})
+
+
+// end of delete trade
 
 // calculator
 userInput.addEventListener('submit', function (e) {
