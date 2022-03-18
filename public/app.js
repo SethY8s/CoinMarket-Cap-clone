@@ -95,22 +95,42 @@ async function tradeLoader() {
       <td>$${el.after.toLocaleString('en-US')}</td>
       <td>$${el.gainLoss.toLocaleString('en-US')}</td>
       <td>${el.change}%</td>
-      <td><button id="deleteButton" class="btn btn-secondary">delete trade</button></td>`;
+      <td><button id=${el._id} class="btn btn-secondary">delete trade</button></td>`;
 
      feedWealth.insertAdjacentHTML('afterbegin', tradeLoader);
+
+     document.getElementById(el._id).addEventListener('click', function(){
+      console.log(`${el._id}`)
+
+      const deleteData = {
+        id: el._id
+      }
+
+      const option = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+    
+        body: JSON.stringify(deleteData),
+      };
+    
+      fetch('/deleteData', option)
+        .then((res) => res.text())
+        .then((data) => {
+          if (data === 'successful') alert('delted blog');
+          document.getElementById('amount').value = '';
+          document.getElementById('amountEnd').value = '';
+        });
+
+   })
   });
+  
 }
 await tradeLoader();
 
 
-// delete trade
 
-document.getElementById("deleteButton").addEventListener('click', function(){
-   console.log('penenns')
-})
-
-
-// end of delete trade
 
 // calculator
 userInput.addEventListener('submit', function (e) {

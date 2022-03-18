@@ -107,6 +107,20 @@ app.get('/loadTradeData', async (req, res) => {
   // res.snd only takes string
 });
 
+app.post('/deleteData', requiresAuth(), (req, res) => {
+  console.log(JSON.stringify(req.body.id))
+  // console.log(req.body.id);
+  const deleteData = JSON.stringify(req.body.id)
+
+
+  Trades.deleteOne({_id : deleteData})
+
+  res.send('successful')
+
+})
+
+
+
 // Port
 app.listen(PORT, () => {
   console.log(`App running ${PORT}`);
