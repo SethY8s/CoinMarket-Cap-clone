@@ -8,9 +8,11 @@ const { db } = require('./models/trades');
 const { auth, requiresAuth } = require('express-openid-connect');
 const { config } = require('./ServerModules/auth0Config');
 
+
 const PORT = process.env.PORT || 2000;
 
 const apiKey = process.env.apiKey;
+const dbURL = process.env.mongo_URL;
 
 app.use(express.static('public'));
 
@@ -32,8 +34,10 @@ app.get('/userLoader', (req, res) => {
 
 // end of login part
 
+// 'mongodb://127.0.0.1:27017/crypto'
+
 mongoose
-  .connect('mongodb://127.0.0.1:27017/crypto')
+  .connect(dbURL)
   .then(() => {
     console.log('mongo connection open');
   })
