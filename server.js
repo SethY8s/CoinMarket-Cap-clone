@@ -1,13 +1,12 @@
 const express = require('express');
+require('dotenv').config();
 const app = express();
 const fetch = require('node-fetch');
-require('dotenv').config();
 const mongoose = require('mongoose');
 const Trades = require('./models/trades');
 const { db } = require('./models/trades');
 const { auth, requiresAuth } = require('express-openid-connect');
 const { config } = require('./ServerModules/auth0Config');
-
 
 const PORT = process.env.PORT || 2000;
 
