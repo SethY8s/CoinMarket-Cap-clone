@@ -110,10 +110,15 @@ app.get('/loadTradeData', async (req, res) => {
 app.post('/deleteData', requiresAuth(), (req, res) => {
   console.log(JSON.stringify(req.body.id))
   // console.log(req.body.id);
-  const deleteData = JSON.stringify(req.body.id)
+  // const deleteData = JSON.stringify(req.body.id)
+  async function run() {
+    await Trades.deleteOne({_id: req.body.id})
+  }
 
+  run()
 
-  Trades.deleteOne({_id : deleteData})
+  // await Trades.deleteMany({_id: JSON.stringify(req.body.id)})
+
 
   res.send('successful')
 
