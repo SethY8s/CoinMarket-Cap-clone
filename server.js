@@ -24,7 +24,7 @@ app.use(auth(config));
 app.get('/userLoader', (req, res) => {
   res.send(
     req.oidc.isAuthenticated()
-      ? `<a class="nav-link active mx-lg-4" href="https://coin-marketcap-clone.herokuapp.com" ><button class="btn btn-secondary btn-sm">logout</button></a> <p class="userName">Welcome: ${JSON.stringify(
+      ? `<a class="nav-link active mx-lg-4" href="https://coin-marketcap-clone.herokuapp.com/logout" ><button class="btn btn-secondary btn-sm">logout</button></a> <p class="userName">Welcome: ${JSON.stringify(
           req.oidc.user.nickname
         )}</p>`
       : `<a class="nav-link active mx-lg-4" href="https://coin-marketcap-clone.herokuapp.com/login" ><button class="btn btn-secondary btn-sm">login</button></a>`
