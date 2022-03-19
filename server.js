@@ -4,7 +4,7 @@ const app = express();
 const fetch = require('node-fetch');
 const mongoose = require('mongoose');
 const Trades = require('./models/trades');
-const { db } = require('./models/trades');
+// const { db } = require('./models/trades');
 const { auth, requiresAuth } = require('express-openid-connect');
 const { config } = require('./ServerModules/auth0Config');
 
@@ -22,6 +22,8 @@ app.use(express.json({ limit: '1mb' }));
 app.use(auth(config));
 
 app.get('/userLoader', (req, res) => {
+  // for local host use http://localhost:2000/login or /logout
+
   res.send(
     req.oidc.isAuthenticated()
       ? `<a class="nav-link active mx-lg-4" href="https://coin-marketcap-clone.herokuapp.com/logout" ><button class="btn btn-secondary btn-sm">logout</button></a> <p class="userName">Welcome: ${JSON.stringify(
