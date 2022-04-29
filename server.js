@@ -115,7 +115,7 @@ app.get('/loadTradeData', async (req, res) => {
   // res.snd only takes string
 });
 
-app.post('/deleteData', requiresAuth(), (req, res) => {
+app.delete('/deleteData', requiresAuth(), (req, res) => {
   console.log(JSON.stringify(req.body.id));
 
   async function run() {
