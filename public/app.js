@@ -108,7 +108,7 @@ async function tradeLoader() {
       }
 
       const option = {
-        method: 'DELETE',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
